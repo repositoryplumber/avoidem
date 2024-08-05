@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avoid the enemies!</title>
+    <title>Simple FPS Game</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
@@ -95,8 +95,8 @@
         }
         
         function detectCollisions() {
+            // Collision detection for player with enemies
             enemies.forEach(enemy => {
-                // Check collision with player
                 const dxPlayer = player.x - enemy.x;
                 const dyPlayer = player.y - enemy.y;
                 const distancePlayer = Math.sqrt(dxPlayer * dxPlayer + dyPlayer * dyPlayer);
@@ -106,7 +106,7 @@
                     window.location.reload();
                 }
                 
-                // Check collision with projectiles
+                // Collision detection for projectiles with enemies
                 projectiles.forEach(projectile => {
                     const dxProjectile = projectile.x - enemy.x;
                     const dyProjectile = projectile.y - enemy.y;
@@ -121,6 +121,13 @@
             });
         }
         
+        function checkWinCondition() {
+            if (enemies.length === 0) {
+                alert('You won!');
+                window.location.reload();
+            }
+        }
+        
         function gameLoop() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
@@ -129,6 +136,7 @@
             updateEnemies();
             updateProjectiles();
             detectCollisions();
+            checkWinCondition();
             
             // Draw Player
             ctx.beginPath();
@@ -163,5 +171,5 @@
     <p>For a how-to-play guide, visit <a href="https://repositoryplumber.github.io/shootemup/howtoplay.txt" target="_blank">this link</a>.</p>
 </body>
 </html>
-        
+
     
