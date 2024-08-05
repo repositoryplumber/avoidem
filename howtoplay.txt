@@ -1,3 +1,4 @@
 avoid the red enemies for as long as you can.
 the longer you avoid, the better.
+you can also use the spacebar to shoot.
 by repositoryplumber :)
