@@ -34,11 +34,21 @@
         window.addEventListener('keydown', (e) => keys[e.code] = true);
         window.addEventListener('keyup', (e) => keys[e.code] = false);
         
-        // Handle shooting
+        // Handle mouse position for shooting direction
+        let mouseX = canvas.width / 2;
+        let mouseY = canvas.height / 2;
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = e.clientX - rect.left;
+            mouseY = e.clientY - rect.top;
+        });
+        
         function shootProjectile() {
             if (keys['Space']) {
-                // Add a new projectile
-                const angle = Math.atan2(keys['MouseY'] - player.y, keys['MouseX'] - player.x);
+                const dx = mouseX - player.x;
+                const dy = mouseY - player.y;
+                const angle = Math.atan2(dy, dx);
+                
                 projectiles.push({
                     x: player.x,
                     y: player.y,
@@ -46,6 +56,7 @@
                     speed: 7,
                     angle: angle
                 });
+                
                 keys['Space'] = false; // Prevent continuous shooting
             }
         }
@@ -147,17 +158,10 @@
             requestAnimationFrame(gameLoop);
         }
         
-        // Mouse position tracking for shooting direction
-        canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            keys['MouseX'] = e.clientX - rect.left;
-            keys['MouseY'] = e.clientY - rect.top;
-        });
-        
         gameLoop();
     </script>
-    <p>for a how-to-play guide, visit https://repositoryplumber.github.io/shootemup/howtoplay.txt</p>
+    <p>For a how-to-play guide, visit <a href="https://repositoryplumber.github.io/shootemup/howtoplay.txt" target="_blank">this link</a>.</p>
 </body>
 </html>
         
-        
+    
